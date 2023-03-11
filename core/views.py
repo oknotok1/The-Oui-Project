@@ -14,10 +14,8 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from django.shortcuts import get_object_or_404
 from .models import Profile
-from .serializers import ProfileSerializer
-
-from .serializers import ProfileSerializer
-from .models import Profile
+from .serializers import PostSerializer, ProfileSerializer
+from django.db.models import Count
 
 
 # Create your views here.
@@ -370,4 +368,5 @@ class ProfileDetail(generics.RetrieveAPIView):
     def get_object(self):
         username = self.kwargs.get('username')
         profile = get_object_or_404(Profile, user__username=username)
+        profile.posts = Post.objects.filter(user=username)
         return profile

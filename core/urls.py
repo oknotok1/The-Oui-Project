@@ -16,6 +16,6 @@ urlpatterns = [
     path('like-post', views.like_post, name='like-post'),
 
     # API Routes
-    path('profiles/', ProfileList.as_view()),
+    path('profiles', ProfileList.as_view()),
     path('profiles/<str:username>', ProfileDetail.as_view()),
 ]

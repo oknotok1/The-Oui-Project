@@ -361,23 +361,12 @@ class ProfileList(generics.ListAPIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
 
-# class ProfileDetail(generics.RetrieveAPIView):
-#     queryset = Profile.objects.all()
-#     serializer_class = ProfileSerializer
-#     permission_classes = [IsAuthenticatedOrReadOnly]
-
-#     def get_object(self):
-#         username = self.kwargs['username']
-#         profile = get_object_or_404(Profile, user__username=username)
-#         return profile
-
-
 class ProfileDetail(generics.RetrieveAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get_object(self):
-        pk = self.kwargs.get('pk')
-        profile = get_object_or_404(Profile, user__username=pk)
+        username = self.kwargs.get('username')
+        profile = get_object_or_404(Profile, user__username=username)
         return profile

@@ -7,6 +7,18 @@ from .models import Profile, Post, LikePost, FollowersCount
 from itertools import chain
 import random
 
+
+# API imports
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from django.shortcuts import get_object_or_404
+from .models import Profile
+from .serializers import ProfileSerializer
+
+from .serializers import ProfileSerializer
+from .models import Profile
+
+
 # Create your views here.
 
 
@@ -339,3 +351,33 @@ def like_post(request):
         post.no_of_likes -= 1
         post.save()
         return redirect('/')
+
+
+# API Views
+
+class ProfileList(generics.ListAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+# class ProfileDetail(generics.RetrieveAPIView):
+#     queryset = Profile.objects.all()
+#     serializer_class = ProfileSerializer
+#     permission_classes = [IsAuthenticatedOrReadOnly]
+
+#     def get_object(self):
+#         username = self.kwargs['username']
+#         profile = get_object_or_404(Profile, user__username=username)
+#         return profile
+
+
+class ProfileDetail(generics.RetrieveAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_object(self):
+        pk = self.kwargs.get('pk')
+        profile = get_object_or_404(Profile, user__username=pk)
+        return profile

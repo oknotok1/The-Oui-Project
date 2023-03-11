@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # added apps
     'core',
     'livesync',
+    'rest_framework',
 ]
 
 MIDDLEWARE_CLASSES = (

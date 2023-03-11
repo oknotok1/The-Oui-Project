@@ -1,0 +1,52 @@
+body {
+  background: var(--background);
+}
+
+main {
+  max-width: 35rem;
+  margin: 0 auto;
+  display: flex;
+  gap: 1.5rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+}
+
+.settings-header {
+  font-weight: lighter !important;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+form span {
+  width: 100%;
+}
+
+form input, form textarea {
+  width: 94%;
+}
+
+form img {
+  max-width: 25%;
+  max-height: 25%;
+}
+
+form button {
+  padding: 1rem 1.5rem;
+}
+
+.file-upload {
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+}
+
+.custom-file-upload:hover {
+  background-color: var(--primary-accent);
+  border: 1px solid var(--text);
+}

@@ -1,0 +1,76 @@
+/* signup.html styles */
+body {
+  background-color: var(--background);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.message {
+  color: var(--warning);
+}
+
+body>div {
+  padding: 1rem 2rem;
+}
+
+.login-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.left-container {
+  max-width: 31rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+main {
+  max-width: 35rem;
+  display: flex;
+  gap: 1.5rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+}
+
+.main-heading {
+  font-weight: 400;
+  font-size: 3rem;
+}
+
+form {
+  /* margin-top: 3rem; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+form input {
+  width: 100%;
+}
+
+.login {
+  /* margin-top: 3rem; */
+  font-size: 0.75rem;
+}
+
+.login button {
+  margin-top: 1rem;
+}
+
+.login-right {
+  background-image: url("/static/images/login_splash.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

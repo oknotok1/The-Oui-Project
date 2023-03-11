@@ -1,0 +1,99 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oui - Sign Up</title>
+    <link rel="stylesheet" href="/static/styles/main.css" />
+    <link rel="stylesheet" href="/static/styles/signup.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="login-left">
+      <header>
+        <a href="/" class="logo">
+          <h1>Oui</h1>
+        </a>
+      </header>
+
+      <div class="left-container">
+        <main>
+          <h1 class="main-heading">
+            Connect and find new friends with <strong>Oui!</strong>
+          </h1>
+          <p>You & I.</p>
+
+          <!-- Django Messages -->
+          {% for message in messages %}
+          <span class="message">{{message}}</span>
+          {% endfor %}
+
+          <form action="" method="POST">
+            {% csrf_token %}
+            <span>
+              <label>Username</label>
+              <input
+                type="text"
+                name="username"
+                placeholder="@johnDoe"
+                required="required"
+              />
+            </span>
+            <span>
+              <label>Email</label>
+              <input
+                type="text"
+                name="email"
+                placeholder="john.doe@example.com"
+                required="required"
+              />
+            </span>
+            <span>
+              <label>Password</label>
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter password..."
+                required="required"
+              />
+            </span>
+            <span>
+              <label>Password</label>
+              <input
+                type="password"
+                name="password2"
+                placeholder="Enter password..."
+                required="required"
+              />
+            </span>
+            <button type="submit">Register</button>
+          </form>
+        </main>
+
+        <section class="login">
+          <p>Already have an account?</p>
+
+          <button type="button" onclick="location.href = '/'">
+            Sign in to <strong>Oui</strong>
+          </button>
+        </section>
+      </div>
+
+      <footer>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms and Conditions</a>
+        <a href="#">About</a>
+      </footer>
+    </div>
+    <div class="login-right"></div>
+  </body>
+</html>

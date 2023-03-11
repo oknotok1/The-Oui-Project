@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oui - @{{user_profile.user.username}}</title>
+    <link rel="stylesheet" href="/static/styles/main.css" />
+    <link rel="stylesheet" href="/static/styles/profile.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header>
+      <a href="/" class="logo">
+        <h1>Oui</h1>
+      </a>
+      <a href="/profile/{{user.username}}">
+        <img
+          src="{{current_user.profile_img.url}}"
+          class="profile-img"
+          alt=""
+        />
+      </a>
+    </header>
+
+    <main>
+      <img src="{{user_profile.profile_img.url}}" class="profile-pic" alt="" />
+      <h1>@{{user_profile.user.username}}</h1>
+      <p>{{user_profile.bio}}</p>
+      <p>{{user_profile.location}}</p>
+      <div class="profile-stats">
+        <p><strong>{{user_post_len}}</strong> posts</p>
+        <p><strong>{{user_follower_len}}</strong> followers</p>
+        <p><strong>{{user_following_len}}</strong> following</p>
+      </div>
+      <form action="/follow" method="POST">
+        {% csrf_token %}
+        <input type="hidden" value="{{user.username}}" name="follower" />
+        <input type="hidden" value="{{user_object.username}}" name="user" />
+        {% if user_object.username == user.username %}
+        <button type="button" onclick="location.href = '/settings'">
+          Account Settings
+        </button>
+        {% else %}
+        <button type="submit">{{button_text}}</button>
+        {% endif %}
+      </form>
+
+      {% for post in user_posts reversed %}
+      <section class="posts">
+        <div class="post">
+          <div class="post-header">
+            <a href="/profile/{{post.user}}">
+              <img src="{{profile_img_url}}" class="profile-img" />
+            </a>
+            <div>
+              <a href="/profile/{{post.user}}"><h4>@{{post.user}}</h4></a>
+              <small>{{post.created_at}}</small>
+            </div>
+          </div>
+
+          {% if post.image %}
+          <div class="post-content">
+            <img src="{{post.image.url}}" alt="" class="post-img" />
+          </div>
+          {% endif %}
+
+          <p>{{post.caption}}</p>
+
+          <div class="likes-section">
+            <a href="/like-post?post_id={{post.id}}">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                width="25"
+                height="25"
+                class="like-btn"
+              >
+                <path
+                  d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z"
+                />
+              </svg>
+            </a>
+            <span class="likes">
+              {% if post.no_of_likes == 0 %}
+              <p>No likes</p>
+              {% elif post.no_of_likes == 1 %}
+              <p>Liked by {{post.no_of_likes}} person</p>
+              {% else %}
+              <p>Liked by {{post.no_of_likes}} people</p>
+              {% endif %}
+            </span>
+          </div>
+        </div>
+        {% endfor %}
+      </section>
+    </main>
+  </body>
+</html>

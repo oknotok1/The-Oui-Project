@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oui - Search</title>
+    <link rel="stylesheet" href="/static/styles/main.css" />
+    <link rel="stylesheet" href="/static/styles/search.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <a href="/" class="logo">
+      <h1>Oui</h1>
+    </a>
+
+    <aside class="left-sidebar">
+      <div class="profile">
+        <img src="static/images/banner.jpg" class="banner" />
+
+        <div class="overlay">
+          <img src="{{user_profile.profile_img.url}}" class="profile-pic" />
+
+          <div class="profile-inner">
+            <a href="/profile/{{user.username}}">
+              <h2>@{{user.username}}</h2>
+            </a>
+            <p>{{user_profile.bio}}</p>
+            <p>{{user_profile.location}}</p>
+            <div class="user-stats">
+              <p><strong>{{user_post_count}}</strong> Posts</p>
+              <p><strong>{{user_following_count}}</strong> Followers</p>
+              <p><strong>{{user_follower_count}}</strong> Following</p>
+            </div>
+          </div>
+
+          <button type="button" onclick="location.href = '/settings'">
+            Account Settings
+          </button>
+          <button onclick="location.href = '/logout'">Log Out</button>
+        </div>
+      </div>
+    </aside>
+
+    <main>
+      <h1>Results for <strong>{{searched_user}}</strong></h1>
+
+      <!-- if there are no search results -->
+      {% if search_results|length == 0 %}
+      <span>
+        <p>
+          <em>
+            No results found for <strong>{{searched_user}}</strong>.<br />
+            Try searching for something else.
+          </em>
+        </p>
+      </span>
+
+      {% else %} {% for users in search_results %}
+      <section class="results">
+        <a class="" href="/profile/{{users.user}}"
+          ><img class="profile-img" src="{{users.profile_img.url}}" />
+        </a>
+        <div>
+          <a href="/profile/{{users.user}}">
+            <h3>@{{users.user}}</h3>
+          </a>
+          <p>{{users.bio}}</p>
+        </div>
+      </section>
+      {% endfor %} {% endif %}
+    </main>
+
+    <aside class="right-sidebar">
+      <form action="/search" method="POST">
+        {% csrf_token %}
+        <input type="search" placeholder="Search..." />
+        <button type="submit" id="search-btn">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="white"
+            class="bi bi-search"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+            />
+          </svg>
+        </button>
+      </form>
+
+      <div class="suggested-users">
+        <h3>People you may know</h3>
+        {% if suggested_users|length == 0 %}
+        <p>
+          <em>
+            No more users to follow.<br />Invite your friends to
+            <strong>Oui</strong> today!
+          </em>
+        </p>
+        {% else %} {% for user in suggested_users %}
+        <div class="post-header">
+          <a href="/profile/{{user.user}}">
+            <img src="{{user.profile_img.url}}" class="profile-img" />
+          </a>
+          <div>
+            <a href="/profile/{{user.user}}">
+              <h4>@{{user.user}}</h4>
+            </a>
+            <small>{{user.bio}}</small>
+          </div>
+        </div>
+        {% endfor %} {% endif %}
+      </div>
+    </aside>
+  </body>
+</html>

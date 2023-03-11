@@ -1,0 +1,142 @@
+/* Global Styles */
+:root {
+  --background: #1B1A1D;
+  --text: #E5E5E5;
+  --dark: #626066;
+  --warning: #ff5555;
+  --primary-accent: #0E6C46;
+}
+
+* {
+  color: var(--text);
+  font-family: 'Manrope', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  padding: 0;
+  margin: 0;
+}
+
+small {
+  font-size: 0.75rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--primary-accent);
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+form button {
+  padding: 1rem 1.25rem;
+  border: 1.5px solid transparent
+}
+
+input, textarea {
+  background-color: var(--background);
+  border: 1.5px solid var(--dark);
+  border-radius: 2rem;
+  padding: 1rem;
+}
+
+input:active, input:focus, input:hover, textarea:active, textarea:focus, textarea:hover {
+  outline: none !important;
+  border: 1.5px solid var(--primary-accent);
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  font-weight: 700;
+  background-color: var(--background);
+  border: 1px solid var(--primary-accent);
+  border-radius: 2rem;
+  /* display: inline-block; */
+  padding: 1rem 2rem;
+  cursor: pointer;
+  position: relative;
+  margin: 0;
+}
+
+textarea {
+  resize: none;
+  font-size: 14px;
+}
+
+button {
+  background-color: var(--primary-accent);
+  color: var(--text);
+  font-weight: 700;
+  border: 1px solid transparent;
+  border-radius: 2rem;
+  padding: 1rem 2rem;
+  cursor: pointer;
+}
+
+button:active, button:focus, button:hover {
+  border: 1px solid var(--text);
+  outline: none !important;
+}
+
+label {
+  background-color: var(--background);
+  padding: 0 0.75rem;
+  font-weight: lighter;
+  font-size: 0.75rem;
+  position: absolute;
+  margin-top: -0.5rem;
+  margin-left: 2rem;
+}
+
+header {
+  padding: 2rem;
+  width: fit-content
+}
+
+.logo {
+  font-weight: 400;
+  font-size: 1.37rem;
+}
+
+header a:hover h1 {
+  color: var(--primary-accent);
+}
+
+header a:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  padding: 3rem;
+  width: 31rem;
+  max-width: 31rem;
+  margin: 0 auto;
+}
+
+footer a {
+  font-size: 0.75rem;
+  color: var(--dark);
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+.message {
+  color: var(--text);
+}

@@ -1,0 +1,68 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oui - Settings</title>
+    <link rel="stylesheet" href="/static/styles/main.css" />
+    <link rel="stylesheet" href="/static/styles/settings.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+      <header>
+        <a href="/" class="logo">
+          <h1>Oui</h1>
+        </a>
+      </header>
+
+      <main >
+        <h1 class="settings-header">Account Settings for <strong>@{{user.username}}</strong></h1>
+        <!-- Django Messages -->
+        {% for message in messages %}
+        <span class="message">{{message}}</span>
+        {% endfor %}
+
+        <form action="" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <img src="{{user_profile.profile_img.url}}" />
+          <span>
+            <input
+              type="file"
+              name="image"
+              class="shadow-none bg-gray-100 mt-4"
+            />
+          </span>
+
+          <span class="file-upload">
+            <label for="file-upload" class="custom-file-upload">
+            Upload Image
+            </label>
+            <input id="file-upload" type="file" name="image" />
+          </span>
+
+          <span>
+            <label>Bio</label>
+            <textarea id="about" name="bio" rows="3" />{{user_profile.bio}}</textarea>
+          </span>
+          <span>
+            <label>Location</label>
+            <input
+              type="text"
+              name="location"
+              value="{{user_profile.location}}"
+              />
+          </span>
+          <button type="submit">Save Changes</button>
+        </form>
+      </main>
+   </body>
+</html>

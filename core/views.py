@@ -3,9 +3,20 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from requests import Response
 from .models import Profile, Post, LikePost, FollowersCount
 from itertools import chain
 import random
+
+
+# API imports
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from django.shortcuts import get_object_or_404
+from .models import Profile
+from .serializers import PostSerializer, ProfileSerializer
+from django.db.models import Count
+
 
 # Create your views here.
 
@@ -339,3 +350,23 @@ def like_post(request):
         post.no_of_likes -= 1
         post.save()
         return redirect('/')
+
+
+# API Views
+
+class ProfileList(generics.ListAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+class ProfileDetail(generics.RetrieveAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_object(self):
+        username = self.kwargs.get('username')
+        profile = get_object_or_404(Profile, user__username=username)
+        profile.posts = Post.objects.filter(user=username)
+        return profile

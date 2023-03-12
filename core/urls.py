@@ -1,7 +1,10 @@
 from django.urls import path
 from . import views
+from .views import *
+
 
 urlpatterns = [
+    # Web Routes
     path('', views.index, name='index'),
     path('signup', views.signup, name='signup'),
     path('login', views.login, name='login'),
@@ -12,4 +15,8 @@ urlpatterns = [
     path('search', views.search, name='search'),
     path('upload', views.upload, name='upload'),
     path('like-post', views.like_post, name='like-post'),
+
+    # API Routes
+    path('profiles', ProfileList.as_view()),
+    path('profiles/<str:username>', ProfileDetail.as_view()),
 ]

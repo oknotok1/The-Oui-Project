@@ -80,7 +80,7 @@
     <aside class="right-sidebar">
       <form action="/search" method="POST">
         {% csrf_token %}
-        <input type="search" placeholder="Search..." />
+        <input type="text" name="username" placeholder="Search for a user..." />
         <button type="submit" id="search-btn">
           <svg
             xmlns="http://www.w3.org/2000/svg"

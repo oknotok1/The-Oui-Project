@@ -64,9 +64,9 @@ def index(request):
     # User stats
     user_posts = Post.objects.filter(user=request.user)
     user_post_count = len(user_posts)
-    user_follower_count = len(FollowersCount.objects.filter(
-        user=request.user))
     user_following_count = len(FollowersCount.objects.filter(
+        user=request.user))
+    user_follower_count = len(FollowersCount.objects.filter(
         follower=request.user))
 
     # Suggested users to follow

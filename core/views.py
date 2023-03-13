@@ -51,6 +51,7 @@ def index(request):
     user_posts = Post.objects.filter(user=request.user.username)
 
     feed = list(chain(*following_feed)) + list(user_posts)
+    feed.sort(key=lambda x: x.created_at, reverse=False)
 
     # Add profile image URLs to each post
     for post in feed:
